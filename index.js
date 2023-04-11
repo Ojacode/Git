@@ -1,6 +1,7 @@
 const express=require('express')
 const multer= require("multer")
 const reader= require('xlsx')
+const ExcelJS=require('exceljs');
 
 const app=express()
 const port=process.env.PORT || 3000
@@ -9,6 +10,7 @@ const port=process.env.PORT || 3000
 app.use(express.json())
 
 app.use('/publicfiles',express.static(__dirname + '/publicfiles'))
+
 
 app.get('/readexcelfile',(req,res)=>{
   let filename=req.query.filename;
@@ -25,6 +27,31 @@ app.get('/readexcelfile',(req,res)=>{
       })
     }
     res.send(data);
+
+  console.log(data)
+  let i = 1;
+  let sum1=0;
+  let sum2=0;
+  let sum3=0;
+  let result={}
+  for(i=0;i<256;i++)
+  {
+    
+    if(data[i].CO1>=7)
+    {
+      sum1=sum1+1;
+    }
+    if(data[i].CO1>=6)
+    {
+      sum2=sum2+1;
+    }
+    if(data[i].CO1>=4)
+    {
+      sum3=sum3+1;
+    }
+    // console.log(data[i].CO1);
+
+  }
   } catch (e) {
     res.send(e)
   }
@@ -65,6 +92,53 @@ app.post('/upload',upload.single('upload'), async(req,res)=>{
    res.status(400).send({error:error.message})
 })
 
+
+app.post('/sheet',async(req,res)=>{
+  try{
+   // Requiring module
+// const reader = require('xlsx')
+
+// Reading our test file
+let workbook=new ExcelJS.Workbook()
+await workbook.xlsx.readFile('./test.xlsx')
+let worksheet=workbook.getWorksheet("Sheet1")
+
+let distinction = worksheet.getRow(3);
+let firstclass= worksheet.getRow(4);
+let secondclass = worksheet.getRow(5);
+
+distinction.getCell(2).value = 2;
+distinction.getCell(3).value = 2;
+distinction.getCell(5).value = 2;
+distinction.getCell(6).value = 2;
+
+firstclass.getCell(2).value = 2;
+firstclass.getCell(3).value = 2;
+firstclass.getCell(5).value = 2;
+firstclass.getCell(6).value = 2;
+
+
+secondclass.getCell(2).value = 2;
+secondclass.getCell(3).value = 2;
+secondclass.getCell(5).value = 2;
+secondclass.getCell(6).value = 2;
+
+
+distinction.commit()
+firstclass.commit()
+secondclass.commit()
+
+ await workbook.xlsx.writeFile('./test.xlsx');
+
+    res.send('done');
+  }
+  catch(e){
+    res.status(400).send(e);
+  }
+});
+
+
 app.listen(port,()=>{
   console.log("Server is up on port "+ port)
 })
+
