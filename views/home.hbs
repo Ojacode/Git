@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/index.css">
+    {{!-- <script src="js/index.js"></script> --}}
+
+</head>
+<body>
+    <br><br><br><br>
+   <h3 align="center">CO Mapping</h3>
+    <form class="form" enctype="multipart/form-data"action="/submit" method="post">
+        {{!-- <div class="form-control"> --}}
+            {{!-- <label for="">Name of faculty</label> --}}
+            <label for="name">Subject</label>
+            <input type="text" id="subject" name="subject"><br><br>
+            <label for="name">No of Students</label>
+            <input type="text" id="no" name="no"><br><br>
+             <h4>UA</h4>
+             <label for="name">Result</label>
+             <label for="name">Target</label><br><br>
+            <label for="name">Distinction</label>
+            <input type="text" id="resultd" name="resultd"><label for="name">H</label>
+            <input type="text" id="targetd" name="targetd"><br><br>
+            <label for="name">First Class</label>
+            <input type="text" id="resultf" name="resultf"><label for="name">M</label>
+            <input type="text" id="targetf" name="targetf"><br><br>
+            <label for="name">Second Class</label>
+            <input type="text" id="results" name="results"><label for="name">L</label>
+            <input type="text" id="targets" name="targets"><br>
+            <br>
+            <h4>UT</h4>
+            <label for="name">Target</label><br><br>
+            <label for="name">H</label>
+            <input type="text" id="uth" name="uth"><label for="name">M</label>
+            <input type="text" id="utm" name="utm"><br><br>
+            <label for="name">L</label>
+            <input type="text" id="utl" name="utl"><br><br>
+            <label for="name">Unit Test 1</label>
+            <input type="file" id="file" name="upload" multiple><br><br>
+            <label for="name">Unit Test 2</label>
+            <input type="file" id="file" name="upload"><br><br>
+            <br><br>     
+        <button >
+            <input type="submit" value="Submit" >
+        </button>
+    </form>
+</body>
+</html>
